@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Avaliação de Consultoria Personal - JOTTA TREINADOR</title>
+  <style>
+    /* Estilos CSS Modernos (incluídos abaixo) */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif; /* Arial como fonte padrão para todos os elementos */
+    }
+    body {
+      background-color: #f4f6f8;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #fff; /* Fundo branco agora */
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+      margin-bottom: 30px;
+      width: 100%;
+    }
+
+    .logo-header {
+      max-width: 200px;
+      height: auto;
+    }
+
+    .progress-bar-container {
+      width: 80%;
+      max-width: 800px;
+      margin-bottom: 20px;
+      background-color: #e9ecef;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      background-color: #28a745;
+      height: 10px;
+      width: 0%;
+      border-radius: 5px;
+      transition: width 0.3s ease-in-out;
+    }
+
+    .form-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 800px;
+    }
+
+    .tab-buttons {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .tab-button {
+      padding: 15px 20px;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      font-size: 1em;
+      color: #555;
+      border-bottom: 2px solid transparent;
+      transition: color 0.3s ease;
+    }
+
+    .tab-button.active {
+      color: #007bff;
+      border-bottom-color: #007bff;
+      font-weight: bold;
+    }
+
+    .tab-button:hover {
+      color: #007bff;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fade 0.5s ease-in-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fade {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+      width: calc(100% - 22px);
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-top: 5px;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin-top: 5px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.1em;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: block;
+      width: 100%;
+      margin-top: 30px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #responseBox {
+      background-color: #e9ecef;
+      padding: 20px;
+      border-radius: 5px;
+      margin-top: 30px;
+      text-align: center;
+      display: none;
+      white-space: pre-wrap;
+    }
+
+    #responseBox img {
+      max-width: 80px;
+      height: auto;
+      margin-top: 10px;
+    }
+
+    #avaliacaoPosturalObs {
+      background-color: #f9f9f9;
+      border: 1px dashed #ccc;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 5px;
+    }
+
+    #avaliacaoPosturalObs p {
+      margin-bottom: 10px;
+    }
+
+    #avaliacaoPosturalObs ul {
+      list-style-type: disc;
+      margin-left: 20px;
+    }
+
+    #posturalFeedback {
+      display: none;
+      margin-top: 10px;
+      color: #007bff;
+      font-weight: bold;
+    }
+
+    /* Estilos específicos para telas menores */
+    @media (max-width: 600px) {
+      .form-container {
+        width: 95%;
+        padding: 20px;
+      }
+
+      .tab-buttons {
+        flex-direction: column;
+      }
+
+      .tab-button {
+        padding: 10px 15px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .tab-button.active {
+        border-bottom-width: 2px;
+      }
+
+      .radio-group {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://i.imgur.com/jA1PtRT.png" alt="Logo do JOTTA TREINADOR" class="logo-header">
+  </header>
+
+  <div class="progress-bar-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <div class="form-container">
+    <div class="tab-buttons">
+      <button class="tab-button active" onclick="openTab('tab-dados')">Dados Pessoais</button>
+      <button class="tab-button" onclick="openTab('tab-saude')">Histórico de Saúde</button>
+      <button class="tab-button" onclick="openTab('tab-habitos')">Hábitos de Vida</button>
+      <button class="tab-button" onclick="openTab('tab-objetivos')">Objetivos e Treino</button>
+      <button class="tab-button" onclick="openTab('tab-motivacao')">Motivação</button>
+      <button class="tab-button" onclick="openTab('tab-postural')">Avaliação Postural</button>
+    </div>
+
+    <form id="avaliacaoForm">
+      <div id="tab-dados" class="tab-content active">
+        <legend>I. Dados Pessoais e Antropométricos</legend>
+        <div class="form-group">
+          <label for="nome">1. Qual é o seu nome completo?</label>
+          <input type="text" id="nome" name="nome" required>
+        </div>
+        <div class="form-group">
+          <label for="idade">2. Qual é a sua idade?</label>
+          <input type="number" id="idade" name="idade" required>
+        </div>
+        <div class="form-group">
+          <label for="altura">3. Qual é a sua altura? (em cm)</label>
+          <input type="number" id="altura" name="altura" required>
+        </div>
+        <div class="form-group">
+          <label for="peso">4. Qual é o seu peso atual? (Em jejum pela manhã, em kg)</label>
+          <input type="number" id="peso" name="peso" step="0.1" required>
+        </div>
+      </div>
+
+      <div id="tab-saude" class="tab-content">
+        <legend>II. Histórico e Condição de Saúde</legend>
+        <div class="form-group">
+          <label>5. Você tem alguma condição médica pré-existente que possa afetar seu treinamento?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="condicaoMedica" value="sim" required> Sim</label>
+            <label><input type="radio" name="condicaoMedica" value="nao"> Não</label>
+          </div>
+          <div id="detalheCondicaoDiv" style="display:none; margin-top:10px;">
+            <label for="detalheCondicao">Se sim, descreva:</label>
+            <textarea id="detalheCondicao" name="detalheCondicao" rows="2" placeholder="Descreva sua condição médica"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="lesoes">6. Você já teve lesões musculares ou articulares anteriores?</label>
+          <textarea id="lesoes" name="lesoes" rows="3" placeholder="Descreva, se houver"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="medicacao">7. Você está atualmente sob medicação? Se sim, quais?</label>
+          <textarea id="medicacao" name="medicacao" rows="2" placeholder="Liste as medicações"></textarea>
+        </div>
+        <div class="form-group">
+          <label>8. Você fuma?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="fuma" value="sim" required> Sim</label>
+            <label><input type="radio" name="fuma" value="nao"> Não</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="alcool">9. Com que frequência você consome álcool?</label>
+          <select id="alcool" name="alcool" required>
+            <option value="">Selecione</option>
+            <option value="nunca">Nunca</option>
+            <option value="socialmente">Socialmente</option>
+            <option value="regularmente">Regularmente</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="restricaoAlimentar">10. Você tem alguma restrição alimentar ou segue alguma dieta específica?</label>
+          <textarea id="restricaoAlimentar" name="restricaoAlimentar" rows="2" placeholder="Descreva, se houver"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="alergias">11. Você tem alergias conhecidas?</label>
+          <textarea id="alergias" name="alergias" rows="2" placeholder="Descreva, se houver"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="historicoFamiliar">12. Você tem um histórico familiar de doenças crônicas?</label>
+          <textarea id="historicoFamiliar" name="historicoFamiliar" rows="2" placeholder="Descreva, se houver"></textarea>
+        </div>
+      </div>
+
+      <div id="tab-habitos" class="tab-content">
+        <legend>III. Hábitos de Vida e Qualidade de Vida</legend>
+        <div class="form-group">
+          <label for="qualidadeSono">13. Como é a qualidade do seu sono?</label>
+          <select id="qualidadeSono" name="qualidadeSono" required>
+            <option value="">Selecione</option>
+            <option value="excelente">Excelente</option>
+            <option value="boa">Boa</option>
+            <option value="regular">Regular</option>
+            <option value="ruim">Ruim</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="nivelEstresse">14. Qual é o seu nível de estresse diário? (1 a 10)</label>
+          <input type="number" id="nivelEstresse" name="nivelEstresse" min="1" max="10" required>
+        </div>
+        <div class="form-group">
+          <label for="nivelEnergia">15. Qual é o seu nível de energia ao longo do dia? (1 a 10)</label>
+          <input type="number" id="nivelEnergia" name="nivelEnergia" min="1" max="10" required>
+        </div>
+      </div>
+
+      <div id="tab-objetivos" class="tab-content">
+        <legend>IV. Objetivos e Preferências de Treino</legend>
+        <div class="form-group">
+          <label for="objetivoPrincipal">16. Qual é o seu principal objetivo com a Consultoria Online?</label>
+          <textarea id="objetivoPrincipal" name="objetivoPrincipal" rows="2" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="frequenciaTreino">17. Com que frequência você gostaria de treinar por semana?</label>
+          <input type="number" id="frequenciaTreino" name="frequenciaTreino" required>
+        </div>
+        <div class="form-group">
+          <label for="experiencia">18. Qual é o seu nível de experiência em treinamento físico?</label>
+          <select id="experiencia" name="experiencia" required>
+            <option value="">Selecione</option>
+            <option value="iniciante">Iniciante</option>
+            <option value="intermediario">Intermediário</option>
+            <option value="avancado">Avançado</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="tempoSessao">19. Quanto tempo você tem disponível para se exercitar em cada sessão?</label>
+          <input type="text" id="tempoSessao" name="tempoSessao" placeholder="Ex: 30 minutos, 1 hora" required>
+        </div>
+        <div class="form-group">
+          <label for="localTreino">20. Você tem acesso a uma academia ou prefere treinar em casa?</label>
+          <select id="localTreino" name="localTreino" required>
+            <option value="">Selecione</option>
+            <option value="academia">Academia</option>
+            <option value="casa">Treinar em casa</option>
+            <option value="ambos">Ambos</option>
+          </select>
+          <div id="detalheAcademiaDiv" style="display:none; margin-top:10px;">
+            <label for="nomeAcademia">Nome da Academia:</label>
+            <input type="text" id="nomeAcademia" name="nomeAcademia" placeholder="Digite o nome da academia">
+            <label for="localizacaoAcademia" style="margin-top:5px;">Localização da Academia:</label>
+            <input type="text" id="localizacaoAcademia" name="localizacaoAcademia" placeholder="Digite onde fica a academia">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="preferenciaTreino">21. Você tem alguma preferência em relação ao tipo de treino (ex: treinamento dinâmico ou de força)?</label>
+          <textarea id="preferenciaTreino" name="preferenciaTreino" rows="2"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="restricaoMobilidade">22. Você tem alguma restrição de mobilidade ou flexibilidade?</label>
+          <textarea id="restricaoMobilidade" name="restricaoMobilidade" rows="2"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="areasProblema">23. Quais são suas principais áreas problemáticas em termos de condicionamento físico?</label>
+          <textarea id="areasProblema" name="areasProblema" rows="2"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="tempoInatividade">24. Faz quanto tempo que você está sem praticar atividade física?</label>
+          <input type="text" id="tempoInatividade" name="tempoInatividade" placeholder="Ex: 3 meses, 1 ano" required>
+        </div>
+      </div>
+
+      <div id="tab-motivacao" class="tab-content">
+        <legend>V. Motivação e Comprometimento</legend>
+        <div class="form-group">
+          <label for="motivacao">25. Qual é o seu nível de motivação para iniciar a Consultoria Online? (1 a 10)</label>
+          <input type="number" id="motivacao" name="motivacao" min="1" max="10" required>
+        </div>
+        <div class="form-group">
+          <label for="comprometimento">26. Qual o seu nível de comprometimento com o seu objetivo? (1 a 10)</label>
+          <input type="number" id="comprometimento" name="comprometimento" min="1" max="10" required>
+        </div>
+        <div class="form-group">
+          <label for="infoAdicional">27. Há mais alguma informação que você gostaria de compartilhar sobre sua saúde e histórico de exercícios?</label>
+          <textarea id="infoAdicional" name="infoAdicional" rows="3"></textarea>
+        </div>
+      </div>
+
+      <div id="tab-postural" class="tab-content">
+        <legend>VI. Avaliação Postural</legend>
+        <div id="avaliacaoPosturalObs" class="form-group">
+          <img src="https://i.imgur.com/cyg4Xu6.png" alt="Avaliação Postural" style="max-width:200px; display:block; margin:10px auto;">
+          <p><strong>OBS:</strong> Para uma boa avaliação postural em fotos, siga estas orientações:</p>
+          <ul>
+            <li><strong>Posição da Pessoa:</strong> Fique de pé, com os pés na largura dos ombros, coluna reta e relaxada.</li>
+            <li><strong>Ângulos:</strong> Tire fotos:
+              <ul>
+                <li><strong>Frontal:</strong> Mostrando o corpo inteiro, alinhamento de ombros e quadris.</li>
+                <li><strong>Lateral:</strong> De lado, para observar a curvatura da coluna.</li>
+                <li><strong>Posterior:</strong> De costas, para analisar simetria e alinhamento.</li>
+              </ul>
+            </li>
+            <li><strong>Iluminação:</strong> Use luz natural ou suave, sem sombras fortes.</li>
+            <li><strong>Foco e Nitidez:</strong> Foto nítida, sem desfocagem.</li>
+            <li><strong>Distância:</strong> A câmera deve capturar o corpo inteiro.</li>
+            <li>
+              <strong>Roupas:</strong>
+              <ul>
+                <li><strong>Homens:</strong> Short acima do joelho ou sunga, para visualizar bem a postura das coxas e quadris.</li>
+                <li><strong>Mulheres:</strong> Top e short ou biquíni, para visualizar bem a postura das coxas, quadris e a linha da coluna.</li>
+              </ul>
+            </li>
+            <li>Essas opções de roupas permitem uma boa visualização da postura para uma avaliação precisa.</li>
+            <li><strong>Evitar Movimentos:</strong> Fique imóvel ao tirar a foto.</li>
+          </ul>
+        </div>
+        <div class="form-group">
+          <label>Você realizou a avaliação postural?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="avaliacaoPostural" value="sim" required> Sim</label>
+            <label><input type="radio" name="avaliacaoPostural" value="nao"> Não</label>
+          </div>
+        </div>
+        <div id="posturalFeedback">
+          Para darmos início ao seu protocolo e trabalharmos na melhoria de sua composição corporal, poderia, por gentileza, enviar as fotos pelo WhatsApp?
+        </div>
+        <button type="submit">Enviar Avaliação</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="responseBox"></div>
+
+  <script>
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+    const progressBar = document.getElementById('progressBar');
+    const form = document.getElementById('avaliacaoForm');
+
+    let currentTab = 0;
+
+    function updateProgressBar() {
+      const progress = ((currentTab + 1) / tabContents.length) * 100;
+      progressBar.style.width = `${progress}%`;
+    }
+
+    function openTab(tabId) {
+      tabContents.forEach(tab => tab.classList.remove('active'));
+      tabButtons.forEach(button => button.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      const activeButton = Array.from(tabButtons).find(button => button.textContent.includes(tabId.split('-')[1].charAt(0).toUpperCase() + tabId.split('-')[1].slice(1)));
+      if (activeButton) {
+        activeButton.classList.add('active');
+        currentTab = Array.from(tabButtons).indexOf(activeButton);
+        updateProgressBar();
+      }
+    }
+
+    // Abre a primeira aba por padrão
+    openTab('tab-dados');
+
+    // Lógica para exibir/ocultar detalhes da condição médica
+    document.querySelectorAll('input[name="condicaoMedica"]').forEach(radio => {
+      radio.addEventListener('change', function() {
+        document.getElementById('detalheCondicaoDiv').style.display = this.value === "sim" ? "block" : "none";
+        if (this.value === "nao") {
+          document.getElementById('detalheCondicao').value = "";
+        }
+      });
+    });
+
+    // Lógica para exibir/ocultar detalhes da academia
+    document.getElementById('localTreino').addEventListener('change', function() {
+      const display = this.value === "academia" || this.value === "ambos" ? "block" : "none";
+      document.getElementById('detalheAcademiaDiv').style.display = display;
+      if (display === "none") {
+        document.getElementById('nomeAcademia').value = "";
+        document.getElementById('localizacaoAcademia').value = "";
+      }
+    });
+
+    // Lógica para exibir feedback da avaliação postural
+    document.querySelectorAll('input[name="avaliacaoPostural"]').forEach(radio => {
+      radio.addEventListener('change', function() {
+        document.getElementById('posturalFeedback').style.display = 'block';
+      });
+    });
+
+    // Processamento do envio do formulário (mantive a lógica original)
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      let message = "Avaliação de Consultoria Personal\n\n";
+
+      message += "I. Dados Pessoais e Antropométricos:\n";
+      message += "Nome: " + document.getElementById('nome').value + "\n";
+      message += "Idade: " + document.getElementById('idade').value + "\n";
+      message += "Altura: " + document.getElementById('altura').value + " cm\n";
+      message += "Peso: " + document.getElementById('peso').value + " kg\n\n";
+
+      let condVal = document.querySelector('input[name="condicaoMedica"]:checked').value;
+      message += "II. Histórico e Condição de Saúde:\n";
+      message += "Condição médica pré-existente: " + condVal;
+      if (condVal === "sim") {
+        message += " - " + document.getElementById('detalheCondicao').value;
+      }
+      message += "\n";
+      message += "Lesões anteriores: " + document.getElementById('lesoes').value + "\n";
+      message += "Medicação atual: " + document.getElementById('medicacao').value + "\n";
+      let fuma = document.querySelector('input[name="fuma"]:checked').value;
+      message += "Fuma: " + fuma + "\n";
+      message += "Consumo de álcool: " + document.getElementById('alcool').value + "\n";
+      message += "Restrição alimentar: " + document.getElementById('restricaoAlimentar').value + "\n";
+      message += "Alergias: " + document.getElementById('alergias').value + "\n";
+      message += "Histórico familiar: " + document.getElementById('historicoFamiliar').value + "\n\n";
+
+      message += "III. Hábitos de Vida e Qualidade de Vida:\n";
+      message += "Qualidade do sono: " + document.getElementById('qualidadeSono').value + "\n";
+      message += "Nível de estresse: " + document.getElementById('nivelEstresse').value + "\n";
+      message += "Nível de energia: " + document.getElementById('nivelEnergia').value + "\n\n";
+
+      message += "IV. Objetivos e Preferências de Treino:\n";
+      message += "Objetivo principal: " + document.getElementById('objetivoPrincipal').value + "\n";
+      message += "Frequência do treino: " + document.getElementById('frequenciaTreino').value + " vezes/semana\n";
+      message += "Nível de experiência: " + document.getElementById('experiencia').value + "\n";
+      message += "Tempo disponível por sessão: " + document.getElementById('tempoSessao').value + "\n";
+      let localTreino = document.getElementById('localTreino').value;
+      message += "Local de treino: " + localTreino;
+      if (localTreino === "academia" || localTreino === "ambos") {
+        message += " - Academia: " + document.getElementById('nomeAcademia').value + ", " + document.getElementById('localizacaoAcademia').value;
+      }
+      message += "\n";
+      message += "Preferência de treino: " + document.getElementById('preferenciaTreino').value + "\n";
+      message += "Restrição de mobilidade: " + document.getElementById('restricaoMobilidade').value + "\n";
+      message += "Áreas problemáticas: " + document.getElementById('areasProblema').value + "\n";
+      message += "Tempo sem atividade: " + document.getElementById('tempoInatividade').value + "\n\n";
+
+      message += "V. Motivação e Comprometimento:\n";
+      message += "Nível de motivação: " + document.getElementById('motivacao').value + "\n";
+      message += "Nível de comprometimento: " + document.getElementById('comprometimento').value + "\n";
+      message += "Informações adicionais: " + document.getElementById('infoAdicional').value + "\n\n";
+
+      message += "VI. Avaliação Postural:\n";
+      let postural = document.querySelector('input[name="avaliacaoPostural"]:checked').value;
+      message += "Avaliação Postural: " + postural + "\n";
+      message += "Para darmos início ao seu protocolo e trabalharmos na melhoria de sua composição corporal, poderia, por gentileza, enviar as fotos pelo WhatsApp?\n";
+
+      let responseBox = document.getElementById("responseBox");
+      responseBox.style.display = "block";
+      responseBox.style.whiteSpace = "pre-wrap";
+      responseBox.innerHTML = message + "<br><br><img src='https://i.imgur.com/Kqi7unk.png' alt='OK'>";
+
+      setTimeout(function() {
+        let whatsAppNumber = "5585988586381";
+        let apiUrl = "https://api.whatsapp.com/send?phone=" + whatsAppNumber + "&text=" + encodeURIComponent(message);
+        window.open(apiUrl, "_blank");
+        form.reset();
+        responseBox.style.display = "none";
+        responseBox.innerHTML = "";
+        openTab('tab-dados'); // Retorna para a primeira aba após o envio
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
